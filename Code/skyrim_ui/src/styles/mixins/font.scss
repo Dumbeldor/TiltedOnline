@@ -51,24 +51,5 @@ $font: (
     $style-list: if($style == 'both', ( normal, italic ), ( $style ));
     $type-list: map-get($font, type);
 
-    @each $type in $types {
-      $type-format: map-get($type-list, $type);
-
-      @if not($type-format) {
-        @error '`#{dump($type)}` is not a valid type. ' +
-          'Valid types are: #{dump(map-keys($type-list)))}.';
-      }
-
-      @each $style-value in $style-list {
-        $source: '#{$root}/#{$folder}/#{$weight-key}-#{$style-value}.#{$type}';
-
-        @font-face {
-          font-family: $family;
-          font-style: $style-value;
-          font-weight: $weight;
-          src: url($source) format('#{$type-format}');
-        }
-      }
-    }
   }
 }
